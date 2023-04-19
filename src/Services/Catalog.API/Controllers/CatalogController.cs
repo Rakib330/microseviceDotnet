@@ -35,6 +35,42 @@ namespace Catalog.API.Controllers
         }
 
 
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
+        [ResponseCache(Duration = 10)]
+        public IActionResult GetByCategory(string Category)
+        {
+            try
+            {
+                var products = _productManager.GetByCategory(Category);
+                return CustomResult("Data Returns Successfully", products);
+            }
+            catch (Exception ex)
+            {
+                return CustomResult(ex.Message, HttpStatusCode.BadRequest);
+            }
+
+        }
+
+
+
+        [HttpGet]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        public IActionResult GetById(string id)
+        {
+            try
+            {
+                var product = _productManager.GetById(id);
+                return CustomResult("Data Returns Successfully", product);
+            }
+            catch (Exception ex)
+            {
+                return CustomResult(ex.Message, HttpStatusCode.BadRequest);
+            }
+
+        }
+
+
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.Created)]
         public IActionResult CreateProduct([FromBody] Product product)
