@@ -15,7 +15,7 @@ namespace Discount.API.Repository
         public async Task<bool> CreateDiscount(Coupon coupon)
         {
             var connection = new NpgsqlConnection(_configuration.GetConnectionString("DiscountDB"));
-            var affected = await connection.ExecuteAsync("INSERT INTO Coupon(ProductId,ProductName,Description,Amount)Values(@ProdcutId,@ProductName,@Description,@Amount)", new { ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
+            var affected = await connection.ExecuteAsync("INSERT INTO Coupon(ProductId,ProductName,Description,Amount)Values(@ProductId,@ProductName,@Description,@Amount)", new { ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
             if (affected > 0)
             {
                 return true;
@@ -26,7 +26,7 @@ namespace Discount.API.Repository
         public async Task<bool> DeleteDiscount(string productId)
         {
             var connection = new NpgsqlConnection(_configuration.GetConnectionString("DiscountDB"));
-            var affected = await connection.ExecuteAsync("DELETE Coupon WHERE ProductId=@ProdcutId", new { ProductId = productId });
+            var affected = await connection.ExecuteAsync("DELETE Coupon WHERE ProductId=@ProductId", new { ProductId = productId });
             if (affected > 0)
             {
                 return true;
@@ -50,7 +50,7 @@ namespace Discount.API.Repository
         public async Task<bool> UpdateDiscount(Coupon coupon)
         {
             var connection = new NpgsqlConnection(_configuration.GetConnectionString("DiscountDB"));
-            var affected = await connection.ExecuteAsync("UPDATE Coupon SET ProductId=@ProdcutId,ProductName=@ProductName,Description=@Description,Amount=@Amount", new { ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
+            var affected = await connection.ExecuteAsync("UPDATE Coupon SET ProductId=@ProductId,ProductName=@ProductName,Description=@Description,Amount=@Amount", new { ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
             if (affected > 0)
             {
                 return true;
