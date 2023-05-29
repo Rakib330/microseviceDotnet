@@ -32,7 +32,7 @@ namespace Discount.API.Repository
                 return true;
             }
             return false;
-        }
+        }  
 
         public async Task<Coupon> GetDiscount(string productId)
         {
